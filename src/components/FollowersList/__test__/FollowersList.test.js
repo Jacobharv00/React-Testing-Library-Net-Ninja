@@ -1,48 +1,39 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import FollowersList from "../FollowersList"
+import FollowersList from '../FollowersList'
 
-const MockFollowersList = () => {
-    return (
-        <BrowserRouter>
-            <FollowersList />
-        </BrowserRouter>
-    )
+const MockFollowersList = async () => {
+  return (
+    <BrowserRouter>
+      <FollowersList />
+    </BrowserRouter>
+  )
 }
 
-describe( "FollowersList", () => {
+describe( "Followers List", () => {
 
-    beforeEach( () => {
-        // console.log("RUNS BEFORE EACH TEST")
-        jest.mock( "../../../__mocks__/axios" )
-    } )
+  beforeEach( () => {
+    console.log( 'Running before each test' )
+  } )
 
-    // beforeAll(() => {
-    //     console.log("RUNS ONCE BEFORE ALL TESTS")
-    // })
+  beforeAll( () => {
+    console.log( 'Running once before all tests' )
+  } )
 
-    // afterEach(() => {
-    //     console.log("RUNS AFTER EACH TEST")
-    // })
+  afterEach( () => {
+    console.log( 'Running after each test' )
+  } )
 
-    // afterAll(() => {
-    //     console.log("RUNS ONCE AFTER ALL TESTS")
-    // })
+  afterAll( () => {
+    console.log( 'Running once after all test' )
+  } )
 
-    it( 'should fetch and render input element', async () => {
-        render(
-            <MockFollowersList />
-        )
-        const followerDivElement = await screen.findByTestId( `follower-item` )
-        expect( followerDivElement ).toBeInTheDocument()
-    } )
 
-    it( 'should fetch and render element', async () => {
-        render(
-            <MockFollowersList />
-        )
 
-        const followerDivElement = await screen.findByTestId( `follower-item-0` )
-        expect( followerDivElement ).toBeInTheDocument()
-    } )
+  it( 'should render follower items', async () => {
+    render( <MockFollowersList /> )
+    const followerDivElement = await screen.findByTestId( 'follower-item-0' )
+    expect( followerDivElement ).toBeInTheDocument()
+  } )
+
 } )

@@ -7,13 +7,12 @@ export default function FollowersList () {
 
   const [ followers, setFollowers ] = useState( [] )
 
+  const fetchFollowers = async () => {
+    const { data } = await axios.get( "https://randomuser.me/api/?results=5" )
+    setFollowers( data.results )
+  }
+
   useEffect( () => {
-
-    const fetchFollowers = async () => {
-      const { data } = await axios.get( "https://randomuser.me/api/?results=5" )
-      setFollowers( data.results )
-    }
-
     fetchFollowers()
   }, [] )
 
@@ -22,7 +21,11 @@ export default function FollowersList () {
     <div className="followerslist-container">
       <div>
         { followers.map( ( follower, index ) => (
-          <div className="follower-item" data-testid={ `follower-item ${index}` }>
+          <div
+            key={ index }
+            className="follower-item"
+            data-testid={ `follower-item-${index}` }
+          >
             <img src={ follower.picture.large } alt='follower' />
             <div className="followers-details">
               <div className="follower-item-name">
